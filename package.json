@@ -16,6 +16,10 @@
     "inquirer": "^7.1.0"
   },
   "dependencies": {
-    "keytar": "^5.5.0"
+    "axios": "^0.19.2",
+    "commander": "^5.0.0",
+    "keytar": "^5.5.0",
+    "oauth-1.0a": "^2.2.6",
+    "opn": "^6.0.0"
   }
 }
