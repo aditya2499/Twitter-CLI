@@ -23,7 +23,7 @@ const configure = {
             validate : util.notEmpty()
          }
       ])
-      await creds.storeKeyAndSceret('apiKey',answers.key,answers.secret)
+      await creds.storeKeyAndSceret('consumer',answers.key,answers.secret)
    },
    
    //command to get the up twitter account authorisation using pinbased and OAuth-1.0a
@@ -31,9 +31,11 @@ const configure = {
    //it is 3 step procedure
    async account(name){
       let creds = new CredentialManager(name)
-      var [apiKey, apiSecret] =await creds.getKeyAndSecret('apiKey')
+      var [apiKey, apiSecret] =await creds.getKeyAndSecret('consumer')
       let twits = new Twits(apiKey,apiSecret)
+      //console.log(twits.baseUrl)
       let response = querystring.parse(await twits.post('oauth/request-token'))
+      console.log('aditya');
       twits.setToken(response['oauth_token'],response['oauth_token_secret'])
      await inquirer.prompt({
         type : 'input',
@@ -55,7 +57,7 @@ const configure = {
 
      let verifyResponse = await twits.get('1.1/account/verify_credentials.json')
      await creds.storeKeyAndSecret(
-        'accountToken',
+        'account',
         tokenResponse['oauth_token'],
         tokenResponse['oauth_token_secret']
      )
